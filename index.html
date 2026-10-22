@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GDi Merch</title>
+  <meta name="description" content="Oficjalny merch GDi aka Simon Gaming MC. Bluzy, koszulki, czapki i gadżety.">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preload" href="assets/fonts/minecraft.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="GDi Merch, strona główna">
+      <img src="assets/img/logo.png" alt="" width="40" height="40">
+      <span>GDi <em>Merch</em></span>
+    </a>
+    <nav class="nav" aria-label="Główna nawigacja">
+      <a href="#sklep">Sklep</a>
+      <a href="#o-gdi">O GDi</a>
+      <a href="#drop">Dropy</a>
+    </nav>
+    <button class="mc-btn cart-btn" type="button" data-open-cart>
+      <img src="assets/textures/item/bundle.png" alt="" width="24" height="24">
+      <span>Koszyk</span>
+      <span class="cart-count" data-cart-count>0</span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="hero-inner">
+        <img class="hero-head" src="assets/img/logo.png" alt="Logo GDi" width="160" height="160">
+        <div class="title-wrap">
+          <h1 class="title">GDi</h1>
+          <p class="splash" data-splash>Nowy merch!</p>
+        </div>
+        <p class="subtitle">aka <span>Simon Gaming MC</span></p>
+        <p class="hero-copy">Oficjalny merch kanału. Craftowany z pikseli, noszony w realu.</p>
+        <div class="hero-actions">
+          <a class="mc-btn mc-btn--wide" href="#sklep">Zobacz merch</a>
+          <a class="mc-btn mc-btn--wide" href="#" data-placeholder-link>Kanał YouTube</a>
+        </div>
+      </div>
+      <div class="ground" aria-hidden="true"></div>
+    </section>
+
+    <section class="layer layer--dirt" id="sklep">
+      <span class="depth" aria-hidden="true">Y: 62</span>
+      <div class="container">
+        <header class="section-head">
+          <h2>Sklep</h2>
+          <p>Wszystkie produkty poniżej to placeholdery. Zdjęcia, ceny i opisy podmienisz w <code>js/main.js</code>.</p>
+        </header>
+        <div class="filters" role="group" aria-label="Filtruj produkty">
+          <button class="mc-btn is-active" type="button" data-filter="all">Wszystko</button>
+          <button class="mc-btn" type="button" data-filter="ubrania">Ubrania</button>
+          <button class="mc-btn" type="button" data-filter="akcesoria">Akcesoria</button>
+        </div>
+        <div class="grid" data-products></div>
+      </div>
+    </section>
+
+    <section class="layer layer--stone" id="o-gdi">
+      <span class="depth" aria-hidden="true">Y: 16</span>
+      <div class="container about">
+        <div class="panel about-text">
+          <h2>O GDi</h2>
+          <p>Tu wpadnie krótki opis kanału. Kim jest Simon, co nagrywa, od kiedy, i dlaczego warto nosić jego merch.</p>
+          <p>Placeholder: drugi akapit o serii, serwerze albo społeczności.</p>
+          <a class="mc-btn mc-btn--wide" href="#" data-placeholder-link>Subskrybuj na YouTube</a>
+        </div>
+        <ul class="stats">
+          <li class="stat"><img src="assets/textures/item/diamond.png" alt="" width="48" height="48"><b>000K</b><span>subskrypcji</span></li>
+          <li class="stat"><img src="assets/textures/item/music_disc_cat.png" alt="" width="48" height="48"><b>000+</b><span>filmów</span></li>
+          <li class="stat"><img src="assets/textures/item/emerald.png" alt="" width="48" height="48"><b>00M</b><span>wyświetleń</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="layer layer--deepslate" id="drop">
+      <span class="depth" aria-hidden="true">Y: -32</span>
+      <div class="container drop">
+        <h2>Nie przegap dropu</h2>
+        <p>Nowe kolekcje schodzą szybciej niż diamenty na serwerze. Zostaw maila, damy znać.</p>
+        <form class="drop-form" data-drop-form>
+          <label class="sr-only" for="email">Adres e-mail</label>
+          <input class="mc-input" id="email" type="email" placeholder="twoj@mail.pl" required autocomplete="email">
+          <button class="mc-btn" type="submit">Zapisz mnie</button>
+        </form>
+        <p class="form-note" data-form-note hidden>Placeholder: tu podepniesz newsletter.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="layer layer--bedrock footer">
+    <span class="depth" aria-hidden="true">Y: -64</span>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="" width="32" height="32">
+        <span>GDi Merch</span>
+      </div>
+      <nav class="footer-links" aria-label="Informacje">
+        <a href="#">Regulamin</a>
+        <a href="#">Dostawa i zwroty</a>
+        <a href="#">Kontakt</a>
+      </nav>
+      <p class="legal">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
+    </div>
+  </footer>
+
+  <!-- Hotbar = podgląd koszyka -->
+  <div class="hud" data-open-cart role="button" tabindex="0" aria-label="Otwórz koszyk">
+    <div class="xp">
+      <span class="xp-level" data-xp-level>0</span>
+      <div class="xp-bar"><div class="xp-fill" data-xp-fill></div></div>
+      <span class="xp-label" data-xp-label>Darmowa dostawa od 200 zł</span>
+    </div>
+    <div class="hotbar" data-hotbar></div>
+  </div>
+
+  <div class="modal" data-cart-modal hidden>
+    <div class="modal-backdrop" data-close-cart></div>
+    <div class="panel cart" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-head">
+        <h2 id="cart-title">Koszyk</h2>
+        <button class="mc-btn mc-btn--icon" type="button" data-close-cart aria-label="Zamknij">X</button>
+      </div>
+      <ul class="cart-list" data-cart-list></ul>
+      <p class="cart-empty" data-cart-empty>Pusto jak w ekwipunku po śmierci w lawie.</p>
+      <div class="cart-foot">
+        <p class="cart-total">Razem: <b data-cart-total>0,00 zł</b></p>
+        <button class="mc-btn mc-btn--wide" type="button" disabled>Do kasy (wkrótce)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" data-toast aria-live="polite">
+    <img data-toast-icon src="" alt="" width="32" height="32">
+    <div>
+      <p class="toast-title">Dodano do koszyka!</p>
+      <p class="toast-text" data-toast-text></p>
+    </div>
+  </div>
+
+  <div class="tooltip" data-tooltip hidden></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
