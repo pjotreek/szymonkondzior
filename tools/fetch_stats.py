@@ -19,7 +19,6 @@ HANDLE = "gdigsmp"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "stats.json")
 API = "https://www.youtube.com/youtubei/v1/"
 CONTEXT = {"client": {"clientName": "WEB", "clientVersion": "2.20250101.00.00", "hl": "en", "gl": "US"}}
-ABOUT_PARAMS = "EgVhYm91dPIGBAoCEgA="
 
 PATTERNS = {
     "subscribers": re.compile(r"^([\d.,]+[KMB]?) subscribers?$"),
@@ -52,6 +51,19 @@ def strings(node):
             yield from strings(v)
 
 
+def continuations(node):
+    """Tokeny doładowania (np. okienko "więcej" z łączną liczbą wyświetleń)."""
+    if isinstance(node, dict):
+        token = node.get("continuationCommand", {}).get("token")
+        if token:
+            yield token
+        for v in node.values():
+            yield from continuations(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from continuations(v)
+
+
 def to_number(text):
     mult = {"K": 1e3, "M": 1e6, "B": 1e9}.get(text[-1], 1)
     return int(float(text.rstrip("KMB").replace(",", "")) * mult)
@@ -70,14 +82,15 @@ def main():
     resolved = call("navigation/resolve_url", {"url": f"https://www.youtube.com/@{HANDLE}"})
     channel_id = resolved["endpoint"]["browseEndpoint"]["browseId"]
 
+    home = call("browse", {"browseId": channel_id})
     found = {}
-    scan(call("browse", {"browseId": channel_id, "params": ABOUT_PARAMS}), found)
-    if len(found) < 3:
-        scan(call("browse", {"browseId": channel_id}), found)
-    if "views" not in found:
-        about = call("browse", {"browseId": channel_id, "params": ABOUT_PARAMS})
-        hints = sorted({s for s in strings(about) if "view" in s.lower() and len(s) < 80})
-        print("Brak wyświetleń, kandydaci:", hints[:20], "klucze:", list(about)[:10])
+    # nagłówek kanału: subskrypcje i liczba filmów
+    scan(home.get("header", {}), found)
+    # okienko "więcej" w nagłówku: łączne wyświetlenia
+    for token in list(dict.fromkeys(continuations(home.get("header", {}))))[:5]:
+        scan(call("browse", {"continuation": token}), found)
+        if "views" in found:
+            break
     if "subscribers" not in found:
         sys.exit(f"Nie znaleziono statystyk kanału {channel_id}: {found}")
 
