@@ -74,6 +74,10 @@ def main():
     scan(call("browse", {"browseId": channel_id, "params": ABOUT_PARAMS}), found)
     if len(found) < 3:
         scan(call("browse", {"browseId": channel_id}), found)
+    if "views" not in found:
+        about = call("browse", {"browseId": channel_id, "params": ABOUT_PARAMS})
+        hints = sorted({s for s in strings(about) if "view" in s.lower() and len(s) < 80})
+        print("Brak wyświetleń, kandydaci:", hints[:20], "klucze:", list(about)[:10])
     if "subscribers" not in found:
         sys.exit(f"Nie znaleziono statystyk kanału {channel_id}: {found}")
 
