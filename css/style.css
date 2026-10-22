@@ -329,9 +329,10 @@ code { font-size: 0.9em; color: var(--cyan); }
 
 /* ---------- o GDi ---------- */
 
-.about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
+.about { display: grid; grid-template-columns: 1.3fr minmax(0, 1fr); gap: 48px; align-items: center; }
 .about-text { display: grid; gap: 16px; justify-items: start; }
 .about-text p { color: var(--muted); max-width: 560px; }
+.stats[hidden] { display: none; }
 .stats { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
 .stats li {
   display: flex;

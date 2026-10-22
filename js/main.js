@@ -127,6 +127,23 @@ function setFilter(cat) {
 const splash = $("[data-splash]");
 if (splash) splash.textContent = SPLASHES[Math.floor(Math.random() * SPLASHES.length)];
 
+// Staty kanału: data/stats.json aktualizuje GitHub Action (tools/fetch_stats.py).
+const statsEl = $("[data-stats]");
+if (statsEl) {
+  fetch(ROOT + "data/stats.json", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((stats) => {
+      const fmt = new Intl.NumberFormat("pl-PL", { notation: "compact", maximumFractionDigits: 1 });
+      $$("[data-stat]", statsEl).forEach((el) => {
+        const value = stats[el.dataset.stat];
+        if (value == null) el.parentElement.remove();
+        else el.textContent = fmt.format(value);
+      });
+      statsEl.hidden = !$("[data-stat]", statsEl);
+    })
+    .catch(() => {});
+}
+
 $("[data-drop-form]")?.addEventListener("submit", (e) => {
   e.preventDefault();
   $("[data-form-note]").hidden = false;

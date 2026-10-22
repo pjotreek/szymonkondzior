@@ -1,0 +1,42 @@
+# Odświeża statystyki kanału i publikuje stronę na gh-pages (lustro domyślnego brancha).
+name: Publikacja i staty
+
+on:
+  push:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Pobierz staty z YouTube
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python3 tools/fetch_stats.py
+
+      - name: Zapisz zmiany
+        run: |
+          if [ -n "$(git status --porcelain data/stats.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/stats.json
+            git commit -m "Aktualizacja statystyk kanału"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+
+      - name: Publikuj na gh-pages
+        run: git push --force origin HEAD:gh-pages

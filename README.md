@@ -41,3 +41,15 @@ python3 tools/build_pages.py
 Tekstury i pikselowa czcionka należą do Mojang/Microsoft. Sklep z merchem to użycie komercyjne, więc przed
 startem sprawdź https://www.minecraft.net/usage-guidelines. Podmiana na własne grafiki to wymiana plików w
 `assets/items`, `assets/textures` i `assets/fonts/minecraft.woff`, bez ruszania kodu.
+
+## Publikacja i statystyki kanału
+
+Workflow `.github/workflows/publish.yml` przy każdym pushu na domyślny branch (i co 6 godzin) pobiera
+statystyki kanału @gdigsmp z YouTube Data API i zapisuje je w `data/stats.json`, a potem publikuje stronę
+na branchu `gh-pages`. Bez klucza API strona dalej się publikuje, tylko sekcja ze statami jest ukryta.
+
+Klucz API:
+1. https://console.cloud.google.com → nowy projekt → "APIs & Services" → włącz "YouTube Data API v3".
+2. "Credentials" → "Create credentials" → "API key". Ogranicz go do YouTube Data API v3.
+3. W repo: Settings → Secrets and variables → Actions → New repository secret, nazwa `YT_API_KEY`.
+4. Actions → "Publikacja i staty" → Run workflow.
