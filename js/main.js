@@ -189,13 +189,12 @@ function initProduct(root) {
 renderCart();
 
 document.addEventListener("click", (e) => {
-  const t = e.target.closest("[data-filter],[data-qty],[data-open-cart],[data-close-cart],[data-placeholder-link]");
+  const t = e.target.closest("[data-filter],[data-qty],[data-open-cart],[data-close-cart]");
   if (!t) return;
   if (t.dataset.filter) setFilter(t.dataset.filter);
   else if (t.dataset.qty) changeQty(t.dataset.qty, Number(t.dataset.delta));
   else if (t.hasAttribute("data-open-cart")) openCart();
   else if (t.hasAttribute("data-close-cart")) closeCart();
-  else if (t.hasAttribute("data-placeholder-link")) e.preventDefault(); // TODO: link do kanału
 });
 
 document.addEventListener("keydown", (e) => {
