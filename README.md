@@ -17,8 +17,8 @@ Podgląd lokalnie: `python3 -m http.server`, potem http://localhost:8000
 ## Jak zmienić produkty
 
 1. Edytuj `data/products.json` (nazwa, cena, opis, rozmiary, zdjęcia).
-2. Uruchom `python3 tools/build_pages.py` (wymaga `pip install pillow`).
-3. Commit i push.
+2. Commit i push. GitHub Action sam uruchomi `tools/build_pages.py` i opublikuje stronę.
+   (Lokalnie, do podglądu: `pip install pillow && python3 tools/build_pages.py`.)
 
 Zdjęcia: PNG z przezroczystym tłem w pełnej rozdzielczości wrzucasz do `assets/products/full/`,
 a w polu `images` wpisujesz ich nazwy bez `.png` (pierwsze to główne, kolejne trafiają do galerii).

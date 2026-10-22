@@ -28,13 +28,18 @@ jobs:
         continue-on-error: true
         run: python3 tools/fetch_stats.py
 
+      - name: Zbuduj strony z data/products.json
+        run: |
+          pip install --quiet pillow
+          python3 tools/build_pages.py
+
       - name: Zapisz zmiany
         run: |
-          if [ -n "$(git status --porcelain data/stats.json)" ]; then
+          if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/stats.json
-            git commit -m "Aktualizacja statystyk kanału"
+            git add -A
+            git commit -m "Aktualizacja statystyk i stron"
             git push origin HEAD:${{ github.ref_name }}
           fi
 
