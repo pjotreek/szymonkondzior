@@ -51,3 +51,13 @@ Staty idą bez klucza API, przez wewnętrzne API YouTube (InnerTube), z którego
 (`tools/fetch_stats.py`). Z przeglądarki się tego nie da zrobić przez CORS, dlatego robi to Action.
 Jeśli pobranie się nie uda, strona i tak się publikuje z ostatnimi zapisanymi statami
 (albo z ukrytą sekcją, jeśli jeszcze ich nie było). Ręczne odświeżenie: Actions → "Publikacja i staty" → Run workflow.
+
+Adres strony (linki kanoniczne i podglądy linków) ustala się sam z nazwy repo, na którym działa Action,
+więc fork działa bez zmian w kodzie. Przy własnej domenie dodaj w workflow `env: SITE_URL: https://twoja-domena.pl`.
+
+### Fork
+
+1. Actions → "I understand my workflows, go ahead and enable them".
+2. Actions → "Publikacja i staty" → Run workflow (stworzy branch `gh-pages`).
+3. Settings → Pages → Deploy from a branch → `gh-pages`, `/ (root)`.
+4. Jeśli krok 2 wywali się na `git push` (403): Settings → Actions → General → Workflow permissions → "Read and write permissions".

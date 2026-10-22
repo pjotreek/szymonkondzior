@@ -19,8 +19,22 @@ import shutil
 
 from PIL import Image
 
-# Adres strony po publikacji, potrzebny do linków kanonicznych i og:image.
-SITE_URL = "https://pjotreek.github.io/szymonkondzior/"
+
+
+def site_url():
+    """Adres opublikowanej strony (linki kanoniczne, og:image).
+
+    SITE_URL z env ma pierwszeństwo (np. własna domena). W GitHub Actions adres
+    wynika z repo, więc fork działa bez zmian w kodzie.
+    """
+    if os.environ.get("SITE_URL"):
+        return os.environ["SITE_URL"].rstrip("/") + "/"
+    owner, _, repo = os.environ.get("GITHUB_REPOSITORY", "pjotreek/szymonkondzior").partition("/")
+    host = f"{owner.lower()}.github.io"
+    return f"https://{host}/" if repo.lower() == host else f"https://{host}/{repo}/"
+
+
+SITE_URL = site_url()
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 TEMPLATES = os.path.join(ROOT, "templates")
