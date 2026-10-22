@@ -23,9 +23,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Bez klucza API. Jeśli YouTube zmieni coś po swojej stronie, strona i tak się opublikuje.
       - name: Pobierz staty z YouTube
-        env:
-          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        continue-on-error: true
         run: python3 tools/fetch_stats.py
 
       - name: Zapisz zmiany

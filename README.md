@@ -45,11 +45,9 @@ startem sprawdź https://www.minecraft.net/usage-guidelines. Podmiana na własne
 ## Publikacja i statystyki kanału
 
 Workflow `.github/workflows/publish.yml` przy każdym pushu na domyślny branch (i co 6 godzin) pobiera
-statystyki kanału @gdigsmp z YouTube Data API i zapisuje je w `data/stats.json`, a potem publikuje stronę
-na branchu `gh-pages`. Bez klucza API strona dalej się publikuje, tylko sekcja ze statami jest ukryta.
+statystyki kanału @gdigsmp i zapisuje je w `data/stats.json`, a potem publikuje stronę na branchu `gh-pages`.
 
-Klucz API:
-1. https://console.cloud.google.com → nowy projekt → "APIs & Services" → włącz "YouTube Data API v3".
-2. "Credentials" → "Create credentials" → "API key". Ogranicz go do YouTube Data API v3.
-3. W repo: Settings → Secrets and variables → Actions → New repository secret, nazwa `YT_API_KEY`.
-4. Actions → "Publikacja i staty" → Run workflow.
+Staty idą bez klucza API, przez wewnętrzne API YouTube (InnerTube), z którego korzysta też yt-dlp i Invidious
+(`tools/fetch_stats.py`). Z przeglądarki się tego nie da zrobić przez CORS, dlatego robi to Action.
+Jeśli pobranie się nie uda, strona i tak się publikuje z ostatnimi zapisanymi statami
+(albo z ukrytą sekcją, jeśli jeszcze ich nie było). Ręczne odświeżenie: Actions → "Publikacja i staty" → Run workflow.
