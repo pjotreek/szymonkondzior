@@ -133,7 +133,8 @@ if (statsEl) {
   fetch(ROOT + "data/stats.json", { cache: "no-cache" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((stats) => {
-      const fmt = new Intl.NumberFormat("pl-PL", { notation: "compact", maximumFractionDigits: 1 });
+      const compact = new Intl.NumberFormat("pl-PL", { notation: "compact", maximumFractionDigits: 1 });
+      const fmt = { format: (n) => (n < 10000 ? n.toLocaleString("pl-PL") : compact.format(n)) };
       $$("[data-stat]", statsEl).forEach((el) => {
         const value = stats[el.dataset.stat];
         if (value == null) el.parentElement.remove();
