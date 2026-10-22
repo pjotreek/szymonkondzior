@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Pobiera tekstury Minecrafta (1.21.1) i buduje z nich assety strony.
 
-- assets/textures/...      oryginalne tekstury bloków, itemów i GUI
-- assets/items/*.png       itemy skórzane przefarbowane na kolory GDi (placeholdery produktów)
-- assets/ui/*.png          9-slice panelu (z inventory.png)
+- assets/textures/...      trawa i ziemia (pasek pod hero)
+- assets/items/*.png       itemy z gry jako placeholdery zdjęć produktów,
+                           skórzane ubrania w każdym kolorze z COLORS
 - assets/fonts/minecraft.woff  czcionka zbudowana z bitmap font/ascii.png + accented.png
 - assets/img/logo.png      logo GDi odtworzone 1:1 jako 8x8 (twarz skina)
 
@@ -24,30 +24,22 @@ BASE = f"https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/{
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 OUT = os.path.join(ROOT, "assets")
 
-TEXTURES = [
-    "block/grass_block_side", "block/grass_block_top", "block/dirt", "block/stone",
-    "block/cobblestone", "block/oak_planks", "block/oak_log", "block/bedrock",
-    "block/deepslate", "block/diamond_ore", "block/emerald_ore", "block/gold_block",
-    "block/crafting_table_front", "block/bookshelf", "block/obsidian",
-    "gui/sprites/widget/button", "gui/sprites/widget/button_highlighted",
-    "gui/sprites/widget/button_disabled", "gui/sprites/container/slot",
-    "gui/sprites/hud/hotbar", "gui/sprites/hud/hotbar_selection",
-    "gui/sprites/hud/experience_bar_background", "gui/sprites/hud/experience_bar_progress",
-    "gui/sprites/hud/heart/full", "gui/sprites/toast/advancement",
-    "item/emerald", "item/diamond", "item/paper", "item/painting", "item/name_tag",
-    "item/totem_of_undying", "item/bundle", "item/music_disc_cat", "item/book",
-]
-
-# Kolory z logo GDi
-GREEN, CYAN, BLUE, SKY = (0x60, 0xDC, 0x46), (0x46, 0xDC, 0xD3), (0x2D, 0x7C, 0xDB), (0x5F, 0xB5, 0xE4)
-LEATHER = {
-    "hoodie_green": ("chestplate", GREEN),
-    "tshirt_cyan": ("chestplate", CYAN),
-    "cap_blue": ("helmet", BLUE),
-    "pants_sky": ("leggings", SKY),
-    "shoes_green": ("boots", GREEN),
-}
+TEXTURES = ["block/grass_block_side", "block/dirt"]
 GRASS_TINT = (0x91, 0xBD, 0x59)  # plains
+
+# Kolory wariantów ubrań (skórzane itemy barwione jak w grze)
+COLORS = {
+    "green": (0x60, 0xDC, 0x46), "cyan": (0x46, 0xDC, 0xD3), "blue": (0x2D, 0x7C, 0xDB),
+    "sky": (0x5F, 0xB5, 0xE4), "black": (0x48, 0x48, 0x48), "white": (0xF0, 0xF0, 0xF0),
+}
+LEATHER_PIECES = ["chestplate", "helmet", "leggings", "boots"]
+
+# Zwykłe itemy: nazwa pliku w assets/items -> tekstura z gry
+ITEMS = {
+    "totem": "totem_of_undying", "painting": "painting", "paper": "paper",
+    "name_tag": "name_tag", "bundle": "bundle", "diamond": "diamond",
+    "emerald": "emerald", "music_disc": "music_disc_cat",
+}
 
 
 def fetch(path):
@@ -77,25 +69,16 @@ def build_textures():
     # grass_block_top jest szary, w grze barwi go biom
     save(tint(fetch_png("textures/block/grass_block_top.png"), GRASS_TINT), "textures", "block/grass_block_top.png")
 
-    for out, (piece, color) in LEATHER.items():
-        base = tint(fetch_png(f"textures/item/leather_{piece}.png"), color)
-        base.alpha_composite(fetch_png(f"textures/item/leather_{piece}_overlay.png"))
-        save(base, "items", out + ".png")
+    for piece in LEATHER_PIECES:
+        base = fetch_png(f"textures/item/leather_{piece}.png")
+        overlay = fetch_png(f"textures/item/leather_{piece}_overlay.png")
+        for color, rgb in COLORS.items():
+            img = tint(base, rgb)
+            img.alpha_composite(overlay)
+            save(img, "items", f"{piece}_{color}.png")
 
-    # 9-slice panelu GUI wycięty z ekwipunku (176x166, rogi 4px)
-    inv = fetch_png("textures/gui/container/inventory.png").crop((0, 0, 176, 166))
-    panel = Image.new("RGBA", (12, 12))
-    w, h = inv.size
-    for (sx, sy), (dx, dy) in {
-        (0, 0): (0, 0), (w - 4, 0): (8, 0), (0, h - 4): (0, 8), (w - 4, h - 4): (8, 8),
-        (40, 0): (4, 0), (40, h - 4): (4, 8), (0, 40): (0, 4), (w - 4, 40): (8, 4), (40, 40): (4, 4),
-    }.items():
-        panel.paste(inv.crop((sx, sy, sx + 4, sy + 4)), (dx, dy))
-    # środek panelu to jednolity kolor, czyścimy ewentualne fragmenty slotów
-    for x in range(4, 8):
-        for y in range(4, 8):
-            panel.putpixel((x, y), inv.getpixel((5, 5)))
-    save(panel, "ui", "panel.png")
+    for out, name in ITEMS.items():
+        save(fetch_png(f"textures/item/{name}.png"), "items", out + ".png")
 
 
 def build_logo():

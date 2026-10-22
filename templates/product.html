@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{name}} | GDi Merch</title>
+  <meta name="description" content="{{short}}">
+  <link rel="canonical" href="{{url}}">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{name}} | GDi Merch">
+  <meta property="og:description" content="{{short}}">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:image" content="{{og_image}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="{{root}}assets/img/favicon.png">
+  <link rel="preload" href="{{root}}assets/fonts/minecraft.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="{{root}}css/style.css">
+</head>
+<body data-root="{{root}}">
+<!-- build:header -->
+<!-- /build:header -->
+
+<main id="main" class="container product" data-product="{{slug}}">
+  <nav class="crumbs" aria-label="Okruszki">
+    <a href="{{root}}">Start</a><span aria-hidden="true">/</span>
+    <a href="{{root}}#sklep">{{category_name}}</a><span aria-hidden="true">/</span>
+    <span aria-current="page">{{name}}</span>
+  </nav>
+
+  <div class="product-grid">
+    <div class="gallery">
+      <div class="gallery-main media" style="--tint:{{tint}}" data-media>
+        {{badge}}
+        <img src="{{root}}assets/items/{{image}}.png" alt="{{name}}" width="16" height="16" data-main-img>
+      </div>
+      {{thumbs}}
+    </div>
+
+    <div class="info">
+      <p class="eyebrow">{{category_name}}</p>
+      <h1>{{name}}</h1>
+      <p class="price price--lg">{{price}}</p>
+      <p class="lead">{{short}}</p>
+
+      <form class="buy" data-buy novalidate>
+        {{color_field}}
+        {{size_field}}
+        <div class="buy-row">
+          <div class="qty" data-qty-field>
+            <button type="button" class="qty-btn" data-step="-1" aria-label="Mniej">-</button>
+            <input type="number" name="qty" value="1" min="1" max="20" inputmode="numeric" aria-label="Ilość">
+            <button type="button" class="qty-btn" data-step="1" aria-label="Więcej">+</button>
+          </div>
+          <button class="btn btn--grow" type="submit">Dodaj do koszyka</button>
+        </div>
+        <p class="buy-error" data-buy-error hidden>Wybierz rozmiar.</p>
+      </form>
+
+      <ul class="perks">
+        <li><b>Darmowa dostawa</b> od 200 zł</li>
+        <li><b>Wysyłka</b> w 1-2 dni robocze</li>
+        <li><b>Zwrot</b> do 14 dni bez podania przyczyny</li>
+      </ul>
+
+      <div class="accordion">
+        <details open>
+          <summary>Opis</summary>
+          {{description}}
+        </details>
+        <details>
+          <summary>Materiał i pielęgnacja</summary>
+          <p>{{material}}</p>
+        </details>
+        {{size_chart}}
+        <details>
+          <summary>Dostawa i zwroty</summary>
+          <p>Placeholder: InPost, kurier, czasy dostawy, zasady zwrotów.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <section class="related" aria-labelledby="related-title">
+    <h2 id="related-title">Może Ci się spodobać</h2>
+    <div class="grid grid--related">
+      {{related}}
+    </div>
+  </section>
+</main>
+
+<!-- build:footer -->
+<!-- /build:footer -->
+</body>
+</html>
