@@ -1,149 +1,200 @@
 {
-  "colors": {
-    "green": { "name": "Zielony", "hex": "#60dc46" },
-    "cyan": { "name": "Turkusowy", "hex": "#46dcd3" },
-    "blue": { "name": "Niebieski", "hex": "#2d7cdb" },
-    "sky": { "name": "Błękitny", "hex": "#5fb5e4" },
-    "black": { "name": "Czarny", "hex": "#2b2b2b", "tint": "#a9b6c2" },
-    "white": { "name": "Biały", "hex": "#f0f0f0" }
-  },
   "categories": {
     "ubrania": "Ubrania",
-    "akcesoria": "Akcesoria"
+    "akcesoria": "Akcesoria",
+    "gadzety": "Gadżety"
   },
   "products": [
     {
-      "slug": "bluza-gdi-smile",
-      "name": "Bluza GDi Smile",
+      "slug": "bluza-gdi-pixel",
+      "name": "Bluza GDi Pixel",
       "category": "ubrania",
-      "price": 179.99,
+      "price": 199.99,
       "badge": "Nowość",
-      "image": "chestplate_{color}",
-      "colors": ["green", "black", "blue"],
+      "images": ["bluza-front", "bluza-tyl"],
       "sizes": ["S", "M", "L", "XL", "XXL"],
-      "short": "Gruba bluza z kapturem i dużym logo GDi na klacie. Placeholder opisu.",
+      "short": "Czarna bluza z kapturem, wielka buźka GDi z przodu i pikselowy wzór na rękawach, kapturze i plecach.",
       "description": [
-        "Tu wpadnie prawdziwy opis bluzy: krój, nadruk, dla kogo, czemu warto.",
-        "Drugi akapit placeholdera: np. info, że to limitowana seria na 100k subów."
+        "Flagowa bluza kanału. Z przodu buźka GDi, na rękawach i plecach pikselowy wzór, jakby ktoś rozwalił creepera w jaskini z diamentami. Kaptur ma wzór także od środka.",
+        "Duża kieszeń kangurka zmieści telefon, przekąski i trzy stacki cobblestone'a."
       ],
-      "material": "80% bawełna, 20% poliester, 320 g/m². Prać w 30°C na lewej stronie."
+      "material": "80% bawełna, 20% poliester, gruba dzianina z drapanym środkiem. Prać w 30°C na lewej stronie, nie suszyć w suszarce."
     },
     {
-      "slug": "koszulka-gdi-classic",
-      "name": "Koszulka GDi Classic",
+      "slug": "koszulka-gdi-all-over",
+      "name": "Koszulka GDi All-Over",
       "category": "ubrania",
-      "price": 89.99,
-      "image": "chestplate_{color}",
-      "colors": ["cyan", "white", "black"],
+      "price": 99.99,
+      "images": ["koszulka"],
       "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
-      "short": "Klasyczny t-shirt z logo z przodu i nickiem na plecach. Placeholder opisu.",
+      "short": "Koszulka z nadrukiem na całej powierzchni: zielono-niebieskie piksele i buźka GDi na środku.",
       "description": [
-        "Placeholder: opis koszulki, nadruku i kroju."
+        "Nadruk sublimacyjny na całej koszulce, więc wzór nie pęka i nie odpada po praniu. Zobaczą cię z drugiego końca mapy.",
+        "Lekka i przewiewna, dobra na lato, eventy i maraton nagrywania."
       ],
-      "material": "100% bawełna czesana, 180 g/m². Prać w 30°C."
+      "material": "100% poliester o fakturze bawełny. Prać w 30°C, nie prasować po nadruku."
     },
     {
       "slug": "czapka-z-daszkiem",
-      "name": "Czapka z daszkiem",
+      "name": "Czapka z daszkiem GDi",
+      "category": "ubrania",
+      "price": 89.99,
+      "images": ["czapka-z-daszkiem"],
+      "sizes": ["Uniwersalny"],
+      "short": "Czarny snapback z buźką GDi z przodu i pikselowym daszkiem.",
+      "description": [
+        "Prosty daszek w zielono-niebieskie piksele, naszywka z buźką GDi z przodu i małe logo z boku.",
+        "Regulacja z tyłu na zatrzask, pasuje na każdą głowę, nawet tę po całonocnym grindzie."
+      ],
+      "material": "Akryl z domieszką wełny, płaski daszek, zapięcie snapback."
+    },
+    {
+      "slug": "czapka-zimowa",
+      "name": "Czapka zimowa GDi",
       "category": "ubrania",
       "price": 69.99,
-      "image": "helmet_{color}",
-      "colors": ["blue", "black", "green"],
+      "images": ["czapka-zimowa"],
       "sizes": ["Uniwersalny"],
-      "short": "Czapka z haftowanym logo i regulacją z tyłu. Placeholder opisu.",
+      "short": "Czarny beanie z wywinięciem i pikselową naszywką GDi.",
       "description": [
-        "Placeholder: opis czapki."
+        "Ciepła czapka na zimę, kiedy biom za oknem zmienia się na śnieżny. Pikselowa naszywka na wywinięciu."
       ],
-      "material": "100% bawełna, haft 3D, regulowany zapięciem na rzep."
+      "material": "100% akryl, ściągacz, uniwersalny rozmiar."
     },
     {
-      "slug": "dresy-simon-gaming",
-      "name": "Dresy Simon Gaming",
-      "category": "ubrania",
-      "price": 149.99,
-      "image": "leggings_{color}",
-      "colors": ["sky", "black"],
-      "sizes": ["S", "M", "L", "XL"],
-      "short": "Miękkie spodnie dresowe ze ściągaczami i napisem na nogawce. Placeholder opisu.",
+      "slug": "plecak-gdi",
+      "name": "Plecak GDi",
+      "category": "akcesoria",
+      "price": 159.99,
+      "images": ["plecak"],
+      "sizes": [],
+      "short": "Czarny plecak z pikselowym wzorem, zielonymi zamkami i buźką GDi na przedniej kieszeni.",
       "description": [
-        "Placeholder: opis dresów."
+        "Główna komora na laptopa do 15,6\", przednia kieszeń na drobiazgi, wyściełane szelki. Do szkoły, na wyjazd i na LAN.",
+        "Zielone zamki pasują do wzoru, więc z daleka widać, kto tu jest z ekipy."
       ],
-      "material": "70% bawełna, 30% poliester, 280 g/m²."
+      "material": "Poliester 600D, wodoodporna podszewka. Pojemność ok. 20 l."
     },
     {
-      "slug": "skarpetki-pixel",
-      "name": "Skarpetki Pixel",
-      "category": "ubrania",
-      "price": 29.99,
-      "image": "boots_{color}",
-      "colors": ["green", "white"],
-      "sizes": ["35-38", "39-42", "43-46"],
-      "short": "Dwie pary skarpetek w pikselowy wzór. Placeholder opisu.",
+      "slug": "podkladka-pod-mysz-xl",
+      "name": "Podkładka pod mysz XL",
+      "category": "akcesoria",
+      "price": 89.99,
+      "images": ["podkladka"],
+      "sizes": [],
+      "short": "Duża podkładka na całe biurko z wielką buźką GDi. Klawiatura i myszka na zdjęciu nie są w zestawie.",
       "description": [
-        "Placeholder: opis skarpetek."
+        "Mieści klawiaturę i mysz z zapasem na flicki. Gładka powierzchnia speed/control, gumowany spód nie ślizga się po biurku.",
+        "Obszyte krawędzie, więc nic się nie strzępi po roku grania."
       ],
-      "material": "80% bawełna, 17% poliamid, 3% elastan."
+      "material": "Tkanina + guma naturalna, 90 × 40 cm, grubość 4 mm. Klawiatura i mysz nie są w zestawie."
+    },
+    {
+      "slug": "etui-na-telefon",
+      "name": "Etui na telefon GDi",
+      "category": "akcesoria",
+      "price": 59.99,
+      "images": ["etui"],
+      "sizes": ["iPhone 15", "iPhone 16", "iPhone 17", "Samsung S25"],
+      "size_label": "Model",
+      "short": "Etui z pikselową buźką GDi na cały tył telefonu.",
+      "description": [
+        "Nadruk na całym tyle, podniesione krawędzie wokół aparatów i ekranu. Lista modeli to na razie przykład."
+      ],
+      "material": "TPU + poliwęglan, nadruk UV, wsparcie dla ładowania bezprzewodowego."
+    },
+    {
+      "slug": "brelok-gdi",
+      "name": "Brelok GDi",
+      "category": "akcesoria",
+      "price": 24.99,
+      "images": ["brelok"],
+      "sizes": [],
+      "short": "Gumowy brelok w kształcie postaci GDi, z metalowym kółkiem.",
+      "description": [
+        "Mały GDi do kluczy, plecaka albo piórnika. Miękki, odporny na upadki z każdej wysokości, bez fall damage."
+      ],
+      "material": "Miękkie PVC, metalowe kółko. Wysokość ok. 6 cm."
+    },
+    {
+      "slug": "kubek-gdi",
+      "name": "Kubek GDi",
+      "category": "gadzety",
+      "price": 49.99,
+      "images": ["kubek"],
+      "sizes": [],
+      "short": "Czarny kubek z zielonym środkiem i pikselową buźką GDi.",
+      "description": [
+        "Na kakao do porannego oglądania nowego odcinka. Zielony środek, czarny wzór dookoła."
+      ],
+      "material": "Ceramika, 330 ml. Można myć w zmywarce i podgrzewać w mikrofalówce."
+    },
+    {
+      "slug": "bidon-gdi",
+      "name": "Bidon GDi",
+      "category": "gadzety",
+      "price": 59.99,
+      "images": ["bidon"],
+      "sizes": [],
+      "short": "Czarny aluminiowy bidon z pikselowym wzorem i karabińczykiem.",
+      "description": [
+        "Lekki bidon na trening, do szkoły i na wyjazdy. Karabińczyk przypniesz do plecaka GDi, żeby był komplet."
+      ],
+      "material": "Aluminium, 600 ml, szczelna nakrętka. Myć ręcznie."
+    },
+    {
+      "slug": "naklejki-gdi",
+      "name": "Naklejki GDi (6 szt.)",
+      "category": "gadzety",
+      "price": 19.99,
+      "images": ["naklejki"],
+      "sizes": [],
+      "short": "Arkusz 6 naklejek: buźka, trzy postacie GDi, logo i pikselowe serce.",
+      "description": [
+        "Na laptopa, telefon, butelkę i drzwi do pokoju. Wodoodporne, więc przetrwają nawet wpadnięcie do wody w Netherze (no dobra, tam nie ma wody)."
+      ],
+      "material": "Folia winylowa z laminatem matowym, odporna na wodę i UV."
+    },
+    {
+      "slug": "maskotka-gdi",
+      "name": "Maskotka GDi",
+      "category": "gadzety",
+      "price": 119.99,
+      "badge": "Hit",
+      "images": ["maskotka"],
+      "sizes": [],
+      "short": "Pluszowy, kwadratowy GDi do przytulania i stawiania przy monitorze.",
+      "description": [
+        "Miękki pluszak w pikselowym wzorze, z wyszytą buźką. Siedzi na biurku i pilnuje, żebyś nie wyszedł z gry bez zapisu."
+      ],
+      "material": "Poliester minky, wypełnienie z włókna. Wysokość ok. 30 cm. Dla dzieci od 3 lat."
     },
     {
       "slug": "figurka-gdi",
       "name": "Figurka GDi",
-      "category": "akcesoria",
-      "price": 59.99,
+      "category": "gadzety",
+      "price": 79.99,
       "badge": "Limit",
-      "image": "totem",
-      "short": "Kolekcjonerska figurka, edycja limitowana. Placeholder opisu.",
+      "images": ["figurka"],
+      "sizes": [],
+      "short": "Kolekcjonerska figurka GDi na podstawce z bloku trawy.",
       "description": [
-        "Placeholder: opis figurki, wysokość, materiał, numer serii."
+        "Malowana figurka machającego GDi na podstawce z napisem. Edycja limitowana, każda sztuka numerowana."
       ],
-      "material": "Żywica, ręcznie malowana. Wysokość ok. 12 cm."
-    },
-    {
-      "slug": "plakat-a2",
-      "name": "Plakat A2",
-      "category": "akcesoria",
-      "price": 39.99,
-      "image": "painting",
-      "short": "Plakat z grafiką z kanału, gotowy do powieszenia. Placeholder opisu.",
-      "description": [
-        "Placeholder: opis plakatu."
-      ],
-      "material": "Papier matowy 200 g/m², format 42 × 59,4 cm. Wysyłany w tubie."
-    },
-    {
-      "slug": "naklejki",
-      "name": "Naklejki (10 szt.)",
-      "category": "akcesoria",
-      "price": 19.99,
-      "image": "paper",
-      "short": "Zestaw 10 wodoodpornych naklejek na laptopa i telefon. Placeholder opisu.",
-      "description": [
-        "Placeholder: opis naklejek."
-      ],
-      "material": "Folia winylowa, laminat matowy, odporna na wodę i UV."
-    },
-    {
-      "slug": "brelok-z-logo",
-      "name": "Brelok z logo",
-      "category": "akcesoria",
-      "price": 24.99,
-      "image": "name_tag",
-      "short": "Metalowy brelok z emaliowanym logo GDi. Placeholder opisu.",
-      "description": [
-        "Placeholder: opis breloka."
-      ],
-      "material": "Stop cynku, emalia. Ok. 4 cm."
+      "material": "Żywica, ręcznie malowana. Wysokość ok. 15 cm."
     },
     {
       "slug": "paczka-niespodzianka",
       "name": "Paczka niespodzianka",
-      "category": "akcesoria",
-      "price": 99.99,
-      "image": "bundle",
-      "short": "Losowe 3-5 produktów z merchu, wartość zawsze wyższa niż cena. Placeholder opisu.",
+      "category": "gadzety",
+      "price": 129.99,
+      "images": ["paczka"],
+      "sizes": [],
+      "short": "Pudełko z losowymi produktami GDi. Wartość zawartości zawsze wyższa niż cena.",
       "description": [
-        "Placeholder: zasady paczki niespodzianki."
+        "Jak skrzynia w lochu, tylko bez szkieletów. W środku 3 do 5 losowych produktów z merchu, czasem coś z limitowanej serii."
       ],
-      "material": "Zawartość losowa."
+      "material": "Zawartość losowa, bez możliwości wyboru produktów."
     }
   ]
 }

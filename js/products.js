@@ -1,111 +1,76 @@
 // Wygenerowane przez tools/build_pages.py z data/products.json. Nie edytuj ręcznie.
 window.GDI = {
   "freeShipping": 200,
-  "colors": {
-    "green": {
-      "name": "Zielony",
-      "hex": "#60dc46"
-    },
-    "cyan": {
-      "name": "Turkusowy",
-      "hex": "#46dcd3"
-    },
-    "blue": {
-      "name": "Niebieski",
-      "hex": "#2d7cdb"
-    },
-    "sky": {
-      "name": "Błękitny",
-      "hex": "#5fb5e4"
-    },
-    "black": {
-      "name": "Czarny",
-      "hex": "#2b2b2b",
-      "tint": "#a9b6c2"
-    },
-    "white": {
-      "name": "Biały",
-      "hex": "#f0f0f0"
-    }
-  },
   "products": {
-    "bluza-gdi-smile": {
-      "name": "Bluza GDi Smile",
-      "price": 179.99,
-      "image": "chestplate_{color}",
-      "colors": [
-        "green",
-        "black",
-        "blue"
-      ]
+    "bluza-gdi-pixel": {
+      "name": "Bluza GDi Pixel",
+      "price": 199.99,
+      "image": "bluza-front"
     },
-    "koszulka-gdi-classic": {
-      "name": "Koszulka GDi Classic",
-      "price": 89.99,
-      "image": "chestplate_{color}",
-      "colors": [
-        "cyan",
-        "white",
-        "black"
-      ]
+    "koszulka-gdi-all-over": {
+      "name": "Koszulka GDi All-Over",
+      "price": 99.99,
+      "image": "koszulka"
     },
     "czapka-z-daszkiem": {
-      "name": "Czapka z daszkiem",
+      "name": "Czapka z daszkiem GDi",
+      "price": 89.99,
+      "image": "czapka-z-daszkiem"
+    },
+    "czapka-zimowa": {
+      "name": "Czapka zimowa GDi",
       "price": 69.99,
-      "image": "helmet_{color}",
-      "colors": [
-        "blue",
-        "black",
-        "green"
-      ]
+      "image": "czapka-zimowa"
     },
-    "dresy-simon-gaming": {
-      "name": "Dresy Simon Gaming",
-      "price": 149.99,
-      "image": "leggings_{color}",
-      "colors": [
-        "sky",
-        "black"
-      ]
+    "plecak-gdi": {
+      "name": "Plecak GDi",
+      "price": 159.99,
+      "image": "plecak"
     },
-    "skarpetki-pixel": {
-      "name": "Skarpetki Pixel",
-      "price": 29.99,
-      "image": "boots_{color}",
-      "colors": [
-        "green",
-        "white"
-      ]
+    "podkladka-pod-mysz-xl": {
+      "name": "Podkładka pod mysz XL",
+      "price": 89.99,
+      "image": "podkladka"
+    },
+    "etui-na-telefon": {
+      "name": "Etui na telefon GDi",
+      "price": 59.99,
+      "image": "etui"
+    },
+    "brelok-gdi": {
+      "name": "Brelok GDi",
+      "price": 24.99,
+      "image": "brelok"
+    },
+    "kubek-gdi": {
+      "name": "Kubek GDi",
+      "price": 49.99,
+      "image": "kubek"
+    },
+    "bidon-gdi": {
+      "name": "Bidon GDi",
+      "price": 59.99,
+      "image": "bidon"
+    },
+    "naklejki-gdi": {
+      "name": "Naklejki GDi (6 szt.)",
+      "price": 19.99,
+      "image": "naklejki"
+    },
+    "maskotka-gdi": {
+      "name": "Maskotka GDi",
+      "price": 119.99,
+      "image": "maskotka"
     },
     "figurka-gdi": {
       "name": "Figurka GDi",
-      "price": 59.99,
-      "image": "totem",
-      "colors": []
-    },
-    "plakat-a2": {
-      "name": "Plakat A2",
-      "price": 39.99,
-      "image": "painting",
-      "colors": []
-    },
-    "naklejki": {
-      "name": "Naklejki (10 szt.)",
-      "price": 19.99,
-      "image": "paper",
-      "colors": []
-    },
-    "brelok-z-logo": {
-      "name": "Brelok z logo",
-      "price": 24.99,
-      "image": "name_tag",
-      "colors": []
+      "price": 79.99,
+      "image": "figurka"
     },
     "paczka-niespodzianka": {
       "name": "Paczka niespodzianka",
-      "price": 99.99,
-      "image": "bundle",
-      "colors": []
+      "price": 129.99,
+      "image": "paczka"
     }
   }
 };

@@ -2,8 +2,7 @@
 """Pobiera tekstury Minecrafta (1.21.1) i buduje z nich assety strony.
 
 - assets/textures/...      trawa i ziemia (pasek pod hero)
-- assets/items/*.png       itemy z gry jako placeholdery zdjęć produktów,
-                           skórzane ubrania w każdym kolorze z COLORS
+- assets/items/*.png       diament i szmaragd do dekoracji hero
 - assets/fonts/minecraft.woff  czcionka zbudowana z bitmap font/ascii.png + accented.png
 - assets/img/logo.png      logo GDi odtworzone 1:1 jako 8x8 (twarz skina)
 
@@ -27,19 +26,8 @@ OUT = os.path.join(ROOT, "assets")
 TEXTURES = ["block/grass_block_side", "block/dirt"]
 GRASS_TINT = (0x91, 0xBD, 0x59)  # plains
 
-# Kolory wariantów ubrań (skórzane itemy barwione jak w grze)
-COLORS = {
-    "green": (0x60, 0xDC, 0x46), "cyan": (0x46, 0xDC, 0xD3), "blue": (0x2D, 0x7C, 0xDB),
-    "sky": (0x5F, 0xB5, 0xE4), "black": (0x48, 0x48, 0x48), "white": (0xF0, 0xF0, 0xF0),
-}
-LEATHER_PIECES = ["chestplate", "helmet", "leggings", "boots"]
-
-# Zwykłe itemy: nazwa pliku w assets/items -> tekstura z gry
-ITEMS = {
-    "totem": "totem_of_undying", "painting": "painting", "paper": "paper",
-    "name_tag": "name_tag", "bundle": "bundle", "diamond": "diamond",
-    "emerald": "emerald", "music_disc": "music_disc_cat",
-}
+# Itemy z gry do dekoracji hero: nazwa pliku w assets/items -> tekstura
+ITEMS = {"diamond": "diamond", "emerald": "emerald"}
 
 
 def fetch(path):
@@ -68,14 +56,6 @@ def build_textures():
         save(fetch_png(f"textures/{name}.png"), "textures", name + ".png")
     # grass_block_top jest szary, w grze barwi go biom
     save(tint(fetch_png("textures/block/grass_block_top.png"), GRASS_TINT), "textures", "block/grass_block_top.png")
-
-    for piece in LEATHER_PIECES:
-        base = fetch_png(f"textures/item/leather_{piece}.png")
-        overlay = fetch_png(f"textures/item/leather_{piece}_overlay.png")
-        for color, rgb in COLORS.items():
-            img = tint(base, rgb)
-            img.alpha_composite(overlay)
-            save(img, "items", f"{piece}_{color}.png")
 
     for out, name in ITEMS.items():
         save(fetch_png(f"textures/item/{name}.png"), "items", out + ".png")

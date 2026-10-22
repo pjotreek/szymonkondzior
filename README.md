@@ -6,7 +6,8 @@ Podgląd lokalnie: `python3 -m http.server`, potem http://localhost:8000
 
 ## Struktura
 
-- `data/products.json`: produkty, kolory, kategorie (na razie placeholdery)
+- `data/products.json`: produkty i kategorie
+- `assets/products/full/`: zdjęcia produktów w pełnej rozdzielczości (PNG, przezroczyste tło)
 - `templates/`: szablon podstrony produktu oraz wspólny header i footer z koszykiem
 - `index.html`: strona główna; bloki między `<!-- build:... -->` są generowane
 - `produkt/<slug>/`: podstrony produktów (generowane)
@@ -15,19 +16,18 @@ Podgląd lokalnie: `python3 -m http.server`, potem http://localhost:8000
 
 ## Jak zmienić produkty
 
-1. Edytuj `data/products.json` (nazwa, cena, opis, kolory, rozmiary, obrazek).
+1. Edytuj `data/products.json` (nazwa, cena, opis, rozmiary, zdjęcia).
 2. Uruchom `python3 tools/build_pages.py` (wymaga `pip install pillow`).
 3. Commit i push.
 
-Pole `image` to nazwa pliku z `assets/items/` bez `.png`; `{color}` zostanie podmienione na kolor wariantu.
-Prawdziwe zdjęcia wrzuć do `assets/items/` i wpisz ich nazwy.
-
-`SITE_URL` w `tools/build_pages.py` musi wskazywać adres opublikowanej strony (linki kanoniczne i podglądy na Discordzie).
+Zdjęcia: PNG z przezroczystym tłem w pełnej rozdzielczości wrzucasz do `assets/products/full/`,
+a w polu `images` wpisujesz ich nazwy bez `.png` (pierwsze to główne, kolejne trafiają do galerii).
+Build sam robi z nich lekkie WebP 600 i 1200 px do strony.
 
 ## Assety
 
-`tools/build_assets.py` pobiera tekstury Minecraft 1.21.1 (mirror InventivetalentDev/minecraft-assets),
-barwi skórzane itemy na kolory wariantów, buduje czcionkę WOFF z bitmap fontu gry i odtwarza logo jako czyste 8x8.
+`tools/build_assets.py` pobiera kilka tekstur Minecraft 1.21.1 (trawa, ziemia, diament, szmaragd),
+buduje czcionkę WOFF z bitmap fontu gry i odtwarza logo jako czyste 8x8.
 Rubik (tekst) jest na licencji SIL OFL.
 
 ```

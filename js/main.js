@@ -1,13 +1,13 @@
 // GDi Merch: koszyk, filtry, strona produktu. Dane produktów: js/products.js (generowane).
 
-const { freeShipping: FREE_SHIPPING, colors: COLORS, products: PRODUCTS } = window.GDI;
+const { freeShipping: FREE_SHIPPING, products: PRODUCTS } = window.GDI;
 const ROOT = document.body.dataset.root || "./";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const money = (v) => v.toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " zł";
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-const imageFor = (p, color) => ROOT + "assets/items/" + p.image.replace("{color}", color || p.colors[0]) + ".png";
+const imageFor = (p) => ROOT + "assets/products/" + p.image + "-600.webp";
 
 const SPLASHES = [
   "Nowy merch!", "100% kwadratowy!", "Teraz z pikselami!", "Subskrybuj!",
@@ -16,7 +16,7 @@ const SPLASHES = [
 
 // ---------- koszyk ----------
 
-const CART_KEY = "gdi-cart-v2";
+const CART_KEY = "gdi-cart-v3";
 let cart = loadCart();
 
 function loadCart() {
@@ -36,7 +36,7 @@ function saveCart() {
   }
 }
 
-const keyOf = (r) => [r.slug, r.color || "", r.size || ""].join("|");
+const keyOf = (r) => [r.slug, r.size || ""].join("|");
 
 function addToCart(item, qty) {
   const row = cart.find((r) => keyOf(r) === keyOf(item));
@@ -66,13 +66,11 @@ function renderCart() {
 
   $("[data-cart-list]").innerHTML = cart.map((r) => {
     const p = PRODUCTS[r.slug];
-    const variant = [r.color && COLORS[r.color].name, r.size].filter(Boolean).join(", ");
-    const tint = r.color ? COLORS[r.color].tint || COLORS[r.color].hex : "#46dcd3";
     return `<li class="cart-item">
-      <div class="media" style="--tint:${tint}"><img src="${imageFor(p, r.color)}" alt=""></div>
+      <div class="media"><img src="${imageFor(p)}" alt=""></div>
       <div>
         <h3><a href="${ROOT}produkt/${r.slug}/">${esc(p.name)}</a></h3>
-        ${variant ? `<small>${esc(variant)}</small>` : ""}
+        ${r.size ? `<small>${esc(r.size)}</small>` : ""}
         <div class="qty">
           <button class="qty-btn" type="button" data-qty="${esc(keyOf(r))}" data-delta="-1" aria-label="Mniej">-</button>
           <span>${r.qty}</span>
@@ -162,25 +160,21 @@ function initProduct(root) {
   const sizeField = $("[data-size-field]", form);
   const error = $("[data-buy-error]", form);
 
-  function selectColor(color) {
-    const input = $(`input[name="color"][value="${color}"]`, form);
-    if (!input) return;
-    input.checked = true;
-    $("[data-main-img]").src = ROOT + "assets/items/" + input.dataset.img + ".png";
-    $("[data-media]").style.setProperty("--tint", input.dataset.tint);
-    $("[data-color-name]").textContent = input.dataset.name;
-    $$("[data-thumb]").forEach((t) => t.classList.toggle("is-active", t.dataset.thumb === color));
-  }
+  // galeria: miniatury podmieniają główne zdjęcie
+  const mainImg = $("[data-media] img", root);
+  $$("[data-thumb]", root).forEach((t) => t.addEventListener("click", () => {
+    const img = $("img", t);
+    mainImg.srcset = img.srcset;
+    mainImg.src = img.src;
+    $$("[data-thumb]", root).forEach((x) => x.classList.toggle("is-active", x === t));
+  }));
 
   form.addEventListener("change", (e) => {
-    if (e.target.name === "color") selectColor(e.target.value);
     if (e.target.name === "size") {
       sizeField.classList.remove("is-error");
       error.hidden = true;
     }
   });
-
-  $$("[data-thumb]").forEach((t) => t.addEventListener("click", () => selectColor(t.dataset.thumb)));
 
   $$("[data-step]", form).forEach((b) => b.addEventListener("click", () => {
     qtyInput.value = Math.min(20, Math.max(1, (parseInt(qtyInput.value, 10) || 1) + Number(b.dataset.step)));
@@ -195,9 +189,8 @@ function initProduct(root) {
       $("input", sizeField).focus();
       return;
     }
-    const color = form.elements.color ? form.elements.color.value : "";
     const qty = Math.min(20, Math.max(1, parseInt(qtyInput.value, 10) || 1));
-    addToCart({ slug, color, size }, qty);
+    addToCart({ slug, size }, qty);
     openCart();
   });
 }

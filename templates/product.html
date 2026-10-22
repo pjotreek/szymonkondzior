@@ -29,9 +29,9 @@
 
   <div class="product-grid">
     <div class="gallery">
-      <div class="gallery-main media" style="--tint:{{tint}}" data-media>
+      <div class="gallery-main media" data-media>
         {{badge}}
-        <img src="{{root}}assets/items/{{image}}.png" alt="{{name}}" width="16" height="16" data-main-img>
+        {{picture}}
       </div>
       {{thumbs}}
     </div>
@@ -43,7 +43,6 @@
       <p class="lead">{{short}}</p>
 
       <form class="buy" data-buy novalidate>
-        {{color_field}}
         {{size_field}}
         <div class="buy-row">
           <div class="qty" data-qty-field>
